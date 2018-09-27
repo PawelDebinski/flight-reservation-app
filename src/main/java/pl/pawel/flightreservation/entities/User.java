@@ -1,9 +1,10 @@
 package pl.pawel.flightreservation.entities;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
-public class User extends AbstractEntity {
+@Table(name = "users")
+public class User extends AbstractEntity{
 
     private String firstName;
     private String lastName;
