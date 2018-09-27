@@ -3,8 +3,10 @@ package pl.pawel.flightreservation.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.pawel.flightreservation.dto.ReservationRequest;
 import pl.pawel.flightreservation.entities.Flight;
 import pl.pawel.flightreservation.repos.FlightRepository;
 
@@ -20,5 +22,11 @@ public class ReservationController {
         Flight flight = flightRepository.findById(flightId).get();
         modelMap.addAttribute("flight", flight);
         return "completeReservation";
+    }
+
+    @PostMapping("/completeReservation")
+    public String completeReservation(ReservationRequest request) {
+
+        return null;
     }
 }
