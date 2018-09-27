@@ -33,7 +33,7 @@ public class UserController {
         if(user.getPassword().equals(password)) {
             return "findFlights";
         } else {
-            modelMap.addAttribute("msg", "Invalid user name or password. Please try angain.");
+            modelMap.addAttribute("msg", "Invalid user name or password. Please try again.");
         }
         return "login/login";
     }
