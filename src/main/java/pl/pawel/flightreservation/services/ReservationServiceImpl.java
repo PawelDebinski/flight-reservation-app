@@ -44,6 +44,6 @@ public class ReservationServiceImpl implements ReservationService {
         reservation.setCheckedIn(false);
         Reservation savedReservation = reservationRepository.save(reservation);
 
-        return null;
+        return savedReservation;
     }
 }
