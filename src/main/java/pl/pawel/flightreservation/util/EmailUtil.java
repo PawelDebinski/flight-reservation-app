@@ -20,6 +20,7 @@ public class EmailUtil {
 
         try {
             MimeMessageHelper messageHelper = new MimeMessageHelper(message, true);
+            messageHelper.setFrom("iammarrypoppinsyo@gmail.com");
             messageHelper.setTo(toAddress);
             messageHelper.setSubject("Itinerary for your Flight");
             messageHelper.setText("Please find your Itinerary attached.");
