@@ -6,6 +6,8 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import pl.pawel.flightreservation.entities.Reservation;
 
@@ -15,7 +17,10 @@ import java.io.FileOutputStream;
 @Component
 public class PDFGenerator {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(PDFGenerator.class);
+
     public void generateItinerary(Reservation reservation, String filePath) {
+        LOGGER.info("=== Inside generateItinerary() -> reservation: {}, filePath: {}", reservation, filePath);
         Document document = new Document();
 
         try {
@@ -25,13 +30,14 @@ public class PDFGenerator {
             document.close();
 
         } catch (DocumentException e) {
-            e.printStackTrace();
+            LOGGER.error("=== Exception in generateItinerary: " + e);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.error("=== Exception in generateItinerary: " + e);
         }
     }
 
     private PdfPTable generateTable(Reservation reservation) {
+        LOGGER.info("=== Inside private generateTable()");
         PdfPTable table = new PdfPTable(2);
         PdfPCell cell;
 
