@@ -1,10 +1,12 @@
 package pl.pawel.flightreservation.entities;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Role extends AbstractEntity {
+public class Role extends AbstractEntity implements GrantedAuthority {
 
     private String name;
 
@@ -25,5 +27,10 @@ public class Role extends AbstractEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String getAuthority() {
+        return name;
     }
 }
