@@ -3,6 +3,8 @@ package pl.pawel.flightreservation.services;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import pl.pawel.flightreservation.controllers.ReservationController;
 import pl.pawel.flightreservation.dto.ReservationRequest;
@@ -18,7 +20,11 @@ import pl.pawel.flightreservation.util.PDFGenerator;
 import java.util.Optional;
 
 @Service
+@PropertySource("classpath:myconfig.properties")
 public class ReservationServiceImpl implements ReservationService {
+
+    @Value("${pl.pawel.flightreservation.itinerary.dirpath}")
+    private String ITINERARY_DIR;
 
     @Autowired
     FlightRepository flightRepository;
@@ -62,7 +68,7 @@ public class ReservationServiceImpl implements ReservationService {
         LOGGER.info("=== Saving reservation: ()", reservation);
         Reservation savedReservation = reservationRepository.save(reservation);
 
-        String filePath = "C:\\Users\\elbabol\\Downloads\\reservation" + savedReservation.getId() + ".pdf";
+        String filePath = ITINERARY_DIR + savedReservation.getId() + ".pdf";
         LOGGER.info("=== Generating the itinerary");
         pdfGenerator.generateItinerary(savedReservation, filePath);
         LOGGER.info("=== Emailing the itinerary");
