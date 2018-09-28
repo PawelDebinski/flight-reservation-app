@@ -21,17 +21,17 @@ public class ReservationRestController {
 
     @RequestMapping("/reservations/{id}")
     public Reservation findReservation(@PathVariable("id") Long id) {
-        LOGGER.info("=== Inside findReservation() -> id: {}", id);
+        LOGGER.info(" === Inside findReservation() -> id: {}", id);
         return reservationRepository.findById(id).get();
     }
 
     @RequestMapping("/reservations")
     public Reservation updateReservation(@RequestBody ReservationUpdateRequest request) {
-        LOGGER.info("=== Inside updateReservation() -> request: {}", request);
+        LOGGER.info(" === Inside updateReservation() -> request: {}", request);
         Reservation reservation = reservationRepository.findById(request.getId()).get();
         reservation.setNumberOfBags(request.getNumberOfBags());
         reservation.setCheckedIn(request.getCheckedIn());
-        LOGGER.info("=== Saving reservation");
+        LOGGER.info(" === Saving reservation");
         return reservationRepository.save(reservation);
     }
 }
