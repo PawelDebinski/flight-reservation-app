@@ -3,6 +3,7 @@ package pl.pawel.flightreservation.services;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import pl.pawel.flightreservation.entities.User;
 import pl.pawel.flightreservation.repos.UserRepository;
 
+@Primary
 @Service
 public class UserDetailsServiceimpl implements UserDetailsService {
 
