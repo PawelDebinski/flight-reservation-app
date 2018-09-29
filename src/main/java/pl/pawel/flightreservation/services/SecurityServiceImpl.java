@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,12 @@ public class SecurityServiceImpl implements SecurityService {
 
         boolean result = token.isAuthenticated();
         LOGGER.info("=== Authentication result: {}", result);
+
+        // Spring będzie przechowywał informacje o zalogowaniu, żeby nie musiał o nie pytać ciągle, lub wysyłać nam strony z logowaniem ponownie
+        if(result) {
+            SecurityContextHolder.getContext().setAuthentication(token);
+        }
+
         return result;
     }
 }
