@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.pawel.flightreservation.entities.User;
 import pl.pawel.flightreservation.repos.UserRepository;
+import pl.pawel.flightreservation.services.SecurityService;
 
 @Controller
 public class UserController {
@@ -23,6 +24,9 @@ public class UserController {
     private BCryptPasswordEncoder encoder;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+
+    @Autowired
+    private SecurityService securityService;
 
     @RequestMapping("/showReg")
     public String showRegistrationPage() {
@@ -47,9 +51,9 @@ public class UserController {
     @PostMapping(value = "/login")
     public String login(@RequestParam("email") String email, @RequestParam("password") String password, ModelMap modelMap) {
         LOGGER.info(" ===Inside login(), and the email is: " + email);
-        User user = userRepository.findByEmail(email);
+        boolean loginResponse = securityService.login(email, password);
 
-        if(user.getPassword().equals(password)) {
+        if(loginResponse)) {
             return "findFlights";
         } else {
             modelMap.addAttribute("msg", "Invalid user name or password. Please try again.");

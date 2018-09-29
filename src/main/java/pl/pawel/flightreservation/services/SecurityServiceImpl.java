@@ -32,7 +32,7 @@ public class SecurityServiceImpl implements SecurityService {
         authenticationManager.authenticate(token);
 
         boolean result = token.isAuthenticated();
-        LOGGER.info("=== Authentication result: {}", result);
+        LOGGER.info("=== Authentication result - token.isAuthenticated(): {}", result);
 
         // Spring będzie przechowywał informacje o zalogowaniu, żeby nie musiał o nie pytać ciągle, lub wysyłać nam strony z logowaniem ponownie
         if(result) {
