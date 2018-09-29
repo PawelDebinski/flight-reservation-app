@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.pawel.flightreservation.controllers.ReservationController;
 import pl.pawel.flightreservation.dto.ReservationRequest;
 import pl.pawel.flightreservation.entities.Flight;
@@ -44,6 +45,7 @@ public class ReservationServiceImpl implements ReservationService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ReservationServiceImpl.class);
 
     @Override
+    @Transactional
     public Reservation bookFlight(ReservationRequest request) {
         LOGGER.info("=== Inside bookFlight()");
         // there goes payment logic
