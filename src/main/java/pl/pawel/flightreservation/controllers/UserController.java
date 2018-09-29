@@ -53,7 +53,7 @@ public class UserController {
         LOGGER.info(" ===Inside login(), and the email is: " + email);
         boolean loginResponse = securityService.login(email, password);
 
-        if(loginResponse)) {
+        if(loginResponse) {
             return "findFlights";
         } else {
             modelMap.addAttribute("msg", "Invalid user name or password. Please try again.");
